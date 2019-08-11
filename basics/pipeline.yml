@@ -2,10 +2,11 @@
 resources:
 - name: learning-concourse
   type: git
-  source: https://github.com/irbekrm/learning-concourse.git
+  source: 
+    uri: https://github.com/irbekrm/learning-concourse.git
 
 jobs:
-  name: job-hello-world
+- name: job-hello-world
   public: true
   plan:
   - get: learning-concourse
