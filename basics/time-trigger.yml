@@ -1,0 +1,21 @@
+---
+resources:
+- name: learning-concourse
+  type: git
+  source:
+    uri: https://github.com/irbekrm/learning-concourse.git
+
+- name: time-trigger
+  type: time
+  source:
+    interval: 2m
+
+jobs:
+- name: hello-world-job
+  public: true
+  plan:
+  - get: learning-concourse
+  - get: time-trigger
+    trigger: true
+  - task: hello-world
+    file: learning-concourse/basics/tasks/hello.yml
