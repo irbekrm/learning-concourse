@@ -10,4 +10,4 @@ inputs:
 - name: urlsh
 
 run:
-  path: .learning-concourse/basic/tasks/go-test.sh
+  path: ./learning-concourse/basic/tasks/go-test.sh
