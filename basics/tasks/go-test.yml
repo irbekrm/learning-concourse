@@ -6,8 +6,8 @@ image_resource:
   source: {repository: golang}
 
 inputs:
-- name: tasks
+- name: learning-concourse
 - name: urlsh
 
 run:
-  path: ./tasks/go-test.sh
+  path: .learning-concourse/basic/tasks/go-test.sh

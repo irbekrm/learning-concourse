@@ -2,11 +2,11 @@
 resources:
 - name: learning-concourse
   type: git
-  sources:
+  source:
     uri: https://github.com/irbekrm/learning-concourse.git
 - name: urlsh
   type: git
-  sources:
+  source:
     uri: https://github.com/irbekrm/urlsh.git
 
 jobs:
@@ -15,5 +15,5 @@ jobs:
   plan:
   - get: learning-concourse
   - get: urlsh
-  - task:
+  - task: unit-tests
     file: learning-concourse/basics/tasks/go-test.yml
