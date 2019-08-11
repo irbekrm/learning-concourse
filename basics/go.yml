@@ -1,0 +1,19 @@
+---
+resources:
+- name: learning-concourse
+  type: git
+  sources:
+    uri: https://github.com/irbekrm/learning-concourse.git
+- name: urlsh
+  type: git
+  sources:
+    uri: https://github.com/irbekrm/urlsh.git
+
+jobs:
+- name: unit-tests
+  public: true
+  plan:
+  - get: learning-concourse
+  - get: urlsh
+  - task:
+    file: learning-concourse/basics/tasks/go-test.yml
