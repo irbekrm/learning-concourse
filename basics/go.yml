@@ -17,3 +17,14 @@ jobs:
   - get: urlsh
   - task: unit-tests
     file: learning-concourse/basics/tasks/go-test.yml
+jobs: 
+- name: build
+  public: true
+  plan:
+  - get: learning-concourse
+  - get: urlsh
+    passed: [unit-tests]
+    trigger: true
+  - task: build
+    file: learning-concourse/basics/tasks/go-build.yml
+  - put: urlsh-bin
