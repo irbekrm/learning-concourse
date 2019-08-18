@@ -1,0 +1,15 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  soource: {repository: busybox}
+
+inputs:
+- name: learning-concourse
+
+outputs:
+- name: hello_file.txt
+
+run:
+  path: learning-concourse/basics/tasks/write_file.yml

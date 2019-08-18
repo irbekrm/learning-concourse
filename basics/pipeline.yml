@@ -12,4 +12,12 @@ jobs:
   - get: learning-concourse
   - task: hello-world
     file: learning-concourse/basics/tasks/hello.yml
-
+- name: task-inputs-outputs
+  public: true
+  plan:
+  - get: learning-concourse
+  - task: write-file
+    file: write_file.yml
+  - task: read-file
+    file: read_file.yml
+    
