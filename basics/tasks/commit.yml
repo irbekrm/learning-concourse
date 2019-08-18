@@ -12,5 +12,5 @@ inputs:
 outputs:
 - name: updated-gist
 
-path:
-  run: concourse-learning/basics/tasks/commit.sh
+run:
+  path: concourse-learning/basics/tasks/commit.sh
