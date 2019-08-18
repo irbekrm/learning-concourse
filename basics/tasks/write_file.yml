@@ -12,4 +12,4 @@ outputs:
 - name: hello_file.txt
 
 run:
-  path: learning-concourse/basics/tasks/write_file.yml
+  path: learning-concourse/basics/tasks/write_file.sh
