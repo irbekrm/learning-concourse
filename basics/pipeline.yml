@@ -17,7 +17,7 @@ jobs:
   plan:
   - get: learning-concourse
   - task: write-file
-    file: write_file.yml
+    file: learning-concourse/basics/tasks/write_file.yml
   - task: read-file
-    file: read_file.yml
+    file: learning-concourse/basics/tasks/read_file.yml
     
