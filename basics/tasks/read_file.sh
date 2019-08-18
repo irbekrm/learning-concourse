@@ -3,4 +3,4 @@
 set -x
 
 ls -la
-cat hello_file.txt
+cat some-data/hello_file.txt

@@ -9,7 +9,7 @@ inputs:
 - name: learning-concourse
 
 outputs:
-- name: hello_file.txt
+- name: some-data
 
 run:
   path: learning-concourse/basics/tasks/write_file.sh

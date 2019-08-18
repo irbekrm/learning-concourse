@@ -7,7 +7,7 @@ image_resource:
 
 inputs:
   - name: learning-concourse
-  - name: hello_file.txt
+  - name: some-data
 
 run:
   path: learning-concourse/basics/tasks/read_file.sh

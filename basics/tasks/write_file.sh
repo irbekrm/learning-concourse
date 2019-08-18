@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "Hello world" > hello_file.txt
+echo "Hello world" > some-data/hello_file.txt
