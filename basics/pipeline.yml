@@ -32,5 +32,6 @@ jobs:
   - task: publish-file
     file: learning-concourse/basics/tasks/commit.yml
   - put: resource-gist
-    params: updated-gist
+    params: 
+      repository: updated-gist
     
