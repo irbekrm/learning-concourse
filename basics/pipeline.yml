@@ -29,6 +29,7 @@ jobs:
   public: true
   plan:
   - get: learning-concourse
+  - get: resource-gist
   - task: publish-file
     file: learning-concourse/basics/tasks/commit.yml
   - put: resource-gist
