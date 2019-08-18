@@ -4,6 +4,11 @@ resources:
   type: git
   source: 
     uri: https://github.com/irbekrm/learning-concourse.git
+- name: resource-gist
+  type: git
+  source:
+    uri: git@gist.github.com:e58efe30d908adc0415b0cd1fad6496c.git
+
 
 jobs:
 - name: job-hello-world
@@ -20,4 +25,12 @@ jobs:
     file: learning-concourse/basics/tasks/write_file.yml
   - task: read-file
     file: learning-concourse/basics/tasks/read_file.yml
+- name: publish-file
+  public: true
+  plan:
+  - get: learning-concourse
+  - task: publish-file
+    file: learning-concourse/basics/tasks/commit.yml
+  - put: resource-gist
+    params: updated-gist
     
