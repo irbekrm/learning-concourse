@@ -14,8 +14,8 @@ jobs:
   public: true
   plan:
   - get: learning-concourse
-    trigger: true
   - get: urlsh
+    trigger: true
   - task: unit-tests
     file: learning-concourse/basics/tasks/go-test.yml
 - name: build
