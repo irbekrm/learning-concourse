@@ -7,8 +7,9 @@ resources:
 - name: resource-gist
   type: git
   source:
-    uri: git@gist.github.com:e58efe30d908adc0415b0cd1fad6496c.git
-
+    uri: ((gist_uri))
+    branch: master
+    private_key: ((private_key))
 
 jobs:
 - name: job-hello-world
