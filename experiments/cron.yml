@@ -13,7 +13,7 @@ resources:
 - name: after7
   type: cron-resource
   source:
-    expression: "27 7 * * *"
+    expression: ((expression))
     location: "Europe/London"
 
 jobs:
