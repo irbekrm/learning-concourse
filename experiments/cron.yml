@@ -1,0 +1,27 @@
+---
+resource_types:
+- name: cron-resource
+  type: docker-image
+  source:
+    repository: cftoolsmiths/cron-resource
+
+resources:
+- name: learning-concourse
+  type: git
+  source:
+    uri: https://github.com/irbekrm/learning-concourse.git
+- name: after7
+  type: cron-resource
+  source:
+    expression: "27 7 * * *"
+    location: "Europe/London"
+
+jobs:
+- name: say-hello
+  public: true
+  plan:
+  - get: after7
+    trigger: true
+  - get: learning-concourse
+  - task: say-hello
+    file: learning-concourse/experiments/tasks/say-hello.yml
