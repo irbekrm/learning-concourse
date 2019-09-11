@@ -15,28 +15,33 @@ resources:
   type: git
   source:
     uri: https://github.com/irbekrm/learning-concourse.git
-- name: cron-expression-setter
+- name: vault-cron-expression-setter
   type: vault
   source:
     url: ((vault.url))
     role_id: ((vault.role_id))
     secret_id: ((vault.secret_id))
     path: /concourse/main/crontest/expression
-- name: vault-cron-expression
+- name: cron-timer
   type: cron-resource
   source:
     expression: ((expression))
     location: "Europe/London"
 
 jobs:
-  - name: first
-    public: true
-    plan:
-    - get: vault-cron-expression-setter
-    - get: learning-concourse
-    - task: first
-      file: learning-concourse/experiments/tasks/first.yml
+- name: first
+  public: true
+  plan:
+  - get: vault-cron-expression-setter
+  - get: learning-concourse
+  - task: first
+    file: learning-concourse/experiments/tasks/first.yml
 - name: second
   public: true
   plan:
+  - get: learning-concourse
+  - get: cron-timer
+    trigger: true
+  - task: second
+    file: learning-concourse/experiments/tasks/second.yml
     
