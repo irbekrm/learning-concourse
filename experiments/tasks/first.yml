@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: golang}
+
+inputs:
+- name: learning-concourse
+- name: vault-cron-expression-setter
+
+outputs:
+- name: new-vault-expression
+
+run:
+  path: learning-concourse/experiments/tasks/first.sh

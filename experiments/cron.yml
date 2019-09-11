@@ -5,6 +5,7 @@ resource_types:
   source:
     repository: cftoolsmiths/cron-resource
 
+
 resources:
 - name: learning-concourse
   type: git
