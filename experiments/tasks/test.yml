@@ -1,0 +1,17 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: alpine}
+
+inputs:
+- name: learning-concourse
+
+run:
+  path: ./learning-concourse/experiments/tasks/test.sh
+
+params:
+  ROLE_ID:
+  SECRET_ID:
+  VAULT_URL:

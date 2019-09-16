@@ -1,0 +1,18 @@
+---
+resources:
+- name: learning-concourse
+  type: git
+  source:
+    uri: https://github.com/irbekrm/learning-concourse.git
+
+jobs:
+- name: test
+  public: true
+  plan:
+  - get: learning-concourse
+  - task: test
+    file: learning-concourse/experiments/tasks/test.yml
+    params:
+      ROLE_ID: ((role_id))
+      SECRET_ID: ((secret_id))
+      VAULT_URL: ((vault_url))
