@@ -1,0 +1,21 @@
+---
+resources:
+- name: learning-concourse
+  type: git
+  source: 
+    uri: https://github.com/irbekrm/learning-concourse.git
+
+jobs:
+- name: one
+  public: true
+  plan:
+  - get: learning-concourse
+  - task: print-params
+    params: &params1
+      ONE: ((one))
+      TWO: ((two))
+    file: learning-concourse/basics/tasks/print-params.yaml
+  - task: print-params2
+    params: *params1
+      THREE: ((three))
+    file: learning-concourse/basics/tasks/print-params2.yaml
