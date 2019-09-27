@@ -14,8 +14,11 @@ jobs:
     params: &params1
       ONE: ((one))
       TWO: ((two))
+      FOUR: ((cetri))
     file: learning-concourse/basics/tasks/print-params.yaml
   - task: print-params2
-    params: *params1
+    params: 
+      <<: *params1
       THREE: ((three))
+      FOUR: ((another))
     file: learning-concourse/basics/tasks/print-params2.yaml
