@@ -23,5 +23,5 @@ jobs:
   - get: learning-concourse
     passed: [set-pipeline]
     trigger: true
-    task: say-hello
+  - task: say-hello
     file: learning-concourse/basics/tasks/hello.yml
