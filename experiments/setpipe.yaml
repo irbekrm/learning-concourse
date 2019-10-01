@@ -18,3 +18,10 @@ jobs:
       PIPELINE_NAME: ((pipeline_name))
       CONCOURSE_USER: ((concourse_user))
       CONCOURSE_PASSWORD: ((concourse_password))
+- name: say-hello
+  plan:
+  - get: learning-concourse
+    passed: [set-pipeline]
+    trigger: true
+    task: say-hello
+    file: learning-concourse/basics/tasks/hello.yml
