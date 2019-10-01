@@ -1,0 +1,19 @@
+---
+resources:
+- name: learning-concourse
+  type: git
+  source:
+    uri: https://github.com/irbekrm/learning-concourse.git
+
+jobs:
+- name: set-pipeline
+  plan:
+  - get: learning-concourse
+  - task: set-pipeline
+    file: learning-concourse/experiments/setpipe.yaml
+    params:
+      TEAM: ((team))
+      CONCOURSE_URL: ((concourse_url))
+      PIPELINE_NAME: ((pipeline_name))
+      CONCOURSE_USER: ((concourse_user))
+      CONCOURSE_PASSWORD: ((concourse_password))
