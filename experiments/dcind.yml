@@ -6,6 +6,7 @@ jobs:
   - get: credhub_image
   - get: uaa_image
   - task: set_up_credhub
+    privileged: true
     file: git_repo/experiments/tasks/set_up_credhub.yml
 
 resources:
