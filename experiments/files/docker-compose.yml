@@ -1,0 +1,24 @@
+# Borrowed from https://github.com/orange-cloudfoundry/credhub-docker/blob/master/docker-compose/docker-compose.yml
+---
+version: '2'
+
+services:
+  uaa:
+    image: pcfseceng/uaa
+    volumes:
+      - ./uaa.yml:/uaa/uaa.yml
+    ports:
+    - 8080:8080
+    restart: always
+
+  credhub:
+    image: orangeopensource/credhub
+    ports:
+      - "9000:9000"
+    links:
+      - uaa:uaa
+    depends_on:
+      - uaa
+    environment:
+      UAA_URL: http://localhost:8080/uaa
+      UAA_INTERNAL_URL: http://uaa:8080/uaa

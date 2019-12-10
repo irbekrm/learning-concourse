@@ -1,0 +1,25 @@
+---
+jobs:
+- name: set_up_credhub
+  plan:
+  - get: git_repo
+  - get: credhub_image
+  - get: uaa_image
+  - task: set_up_credhub
+    file: git_repo/experiments/tasks/set_up_credhub.yml
+
+resources:
+- name: git_repo
+  type: git
+  source:
+    uri: https://github.com/irbekrm/learning-concourse.git
+
+- name: credhub_image
+  type: docker-image
+  source:
+    repository: orangeopensource/credhub
+
+- name: uaa_image
+  type: docker-image
+  source: 
+    repository: pcfseceng/uaa

@@ -1,0 +1,15 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: 
+    repository: irbekrm/dcind
+
+inputs:
+- name: git_repo
+- name: uaa_image
+- name: credhub_image
+
+run:
+  path: ./git_repo/experiments/tasks/set_up_credhub.sh
