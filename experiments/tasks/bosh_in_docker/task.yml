@@ -1,0 +1,19 @@
+---
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: bosh/main-bosh-docker
+
+inputs:
+- name: git_repo
+- name: credhub_cli
+- name: concourse_bosh_release
+- name: postgres_bosh_release
+- name: bpm_bosh_release
+- name: xenial_stemcell
+- name: fly_cli
+
+run:
+  path: git_repo/experiments/tasks/bosh_in_docker/task.sh

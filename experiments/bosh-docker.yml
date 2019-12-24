@@ -1,0 +1,63 @@
+---
+resources:
+- name: git_repo
+  type: git
+  source:
+    uri: https://github.com/irbekrm/learning-concourse.git
+
+- name: credhub_cli
+  type: github-release
+  source:
+    owner: cloudfoundry-incubator
+    repository: credhub-cli
+    access_token: ((github_access_token))
+
+- name: fly_cli
+  type: github-release
+  source:
+    owner: concourse
+    repository: concourse
+    access_token: ((github_access_token))
+
+- name: concourse_bosh_release
+  type: bosh-io-release
+  source:
+    repository: concourse/concourse-bosh-release
+
+- name: postgres_bosh_release
+  type: bosh-io-release
+  source:
+    repository: cloudfoundry/postgres-release
+
+- name: bpm_bosh_release
+  type: bosh-io-release
+  source:
+    repository: cloudfoundry/bpm-release
+
+- name: xenial_stemcell
+  type: bosh-io-stemcell
+  source:
+    name: bosh-warden-boshlite-ubuntu-xenial-go_agent
+
+jobs:
+- name: bosh_in_docker
+  plan:
+  - in_parallel:
+    - get: git_repo
+      trigger: true
+    - get: credhub_cli
+      params:
+        globs:
+        - credhub-linux-*
+    - get: fly_cli
+      params:
+        globs:
+        - fly-*-linux-amd64.tgz
+    - get: postgres_bosh_release
+    - get: concourse_bosh_release
+    - get: bpm_bosh_release
+    - get: xenial_stemcell
+  - task: bosh_in_docker
+    privileged: true
+    file: git_repo/experiments/tasks/bosh_in_docker/task.yml
+    

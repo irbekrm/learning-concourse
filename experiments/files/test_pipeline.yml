@@ -1,0 +1,35 @@
+---
+resource_types:
+- name: credhub_resource
+  type: docker-image
+  source:
+    repository: engineerbetter/concourse-credhub-resource
+    tag: ((credhub_resource_tag))
+
+resources:
+- name: test_secret
+  type: credhub_resource
+  source:
+    server: ((credhub_server))
+    username: ((client_name))
+    password: ((client_secret))
+    path: ((secret_path))
+    skip_tls_validation: true
+
+jobs:
+- name: test
+  plan:
+  - get: test_secret
+  - task: test
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: alpine
+      inputs:
+      - name: test_secret
+      run:
+        path: ls
+        args: [-lR]
+    
