@@ -1,0 +1,73 @@
+---
+anchors: 
+  git_repo: &git_repo
+    uri: git@github.com:irbekrm/learning-concourse.git
+    private_key: |
+      ((gh_key))
+
+resources:
+- name: git_repo
+  type: git
+  source:
+    <<: *git_repo
+
+- name: git_repo_version
+  type: semver
+  source:
+    driver: git
+    file: version
+    branch: version
+    <<: *git_repo
+
+- name: test_image
+  type: registry-image
+  source:
+    username: ((dockerhub.user))
+    password: ((dockerhub.password))
+    repository: ((dockerhub.repository))
+
+jobs:
+- name: systest
+  plan:
+  - get: git_repo
+  - task: build
+    privileged: true
+    output_mapping:
+      image: rc_image
+    file: git_repo/experiments/tasks/build_image.yml
+    params:
+      CONTEXT: git_repo/experiments/files
+      UNPACK_ROOTFS: true
+
+  - task: test_image
+    image: rc_image
+    config:
+      platform: linux
+      run:
+        path: ls
+  
+- name: promote
+  plan:
+  - in_parallel:
+    - get: git_repo_version
+      params:
+        bump: patch
+    - get: git_repo
+      passed: [systest]
+      trigger: true
+  - task: build
+    privileged: true
+    output_mapping:
+      image: final_image
+    file: git_repo/experiments/tasks/build_image.yml
+    params:
+      CONTEXT: git_repo/experiments/files
+      UNPACK_ROOTFS: false
+  - in_parallel:
+    - put: test_image
+      params:
+        image: final_image/image.tar
+        additional_tags: git_repo_version/version
+    - put: git_repo_version
+      params:
+        file: git_repo_version/version
